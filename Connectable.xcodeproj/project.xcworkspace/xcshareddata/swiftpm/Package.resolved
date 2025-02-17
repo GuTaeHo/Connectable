@@ -1,0 +1,15 @@
+{
+  "originHash" : "71b2110d3964c3ccd57eee37321feb6129b656acf344f7d14b120c636c4bf0af",
+  "pins" : [
+    {
+      "identity" : "soybean",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GuTaeHo/SoyBean",
+      "state" : {
+        "revision" : "807fcf4202c48b96a886ba8a085e01826c1ba5d7",
+        "version" : "1.0.11"
+      }
+    }
+  ],
+  "version" : 3
+}
