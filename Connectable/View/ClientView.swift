@@ -11,7 +11,8 @@ struct ClientView: View {
     @State var isLoading: Bool = false
     @State var textEditor: String = ""
     
-    let client = Client(serverIP: "", port: .http)
+    let client = Client(serverIP: "192.168.0.168",
+                        port: .http)
     
     var body: some View {
         VStack {
@@ -26,7 +27,7 @@ struct ClientView: View {
             
             HStack {
                 Button(isLoading ? "수락 대기중" : "연결 시작") {
-                    
+                    client.startConnect()
                 }
             }
         }

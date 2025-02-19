@@ -14,6 +14,19 @@ class Client {
     let port: NWEndpoint.Port
     var connection: NWConnection?
     
+    var sendHandler: ((String) -> ())?
+    var receiveHandler: ((String) -> ())?
+    
+//    init(serverIP: String, port: NWEndpoint.Port, sendHandler: @escaping (String) -> (), receiveHandler: @escaping (String) -> ()) {
+//        self.serverIP = serverIP
+//        self.port = port
+//        self.sendHandler = sendHandler
+//        self.receiveHandler = receiveHandler
+//        
+//        connection = NWConnection(host: NWEndpoint.Host(serverIP), port: port, using: .tcp)
+//        bind()
+//    }
+    
     init(serverIP: String, port: NWEndpoint.Port) {
         self.serverIP = serverIP
         self.port = port
@@ -24,7 +37,7 @@ class Client {
     
     func startConnect() {
         connection?.start(queue: .main)
-        RunLoop.main.run()
+//        RunLoop.main.run()
     }
     
     func bind() {
@@ -39,6 +52,7 @@ class Client {
                     if let error = error {
                         print("⚠️ Send error: \(error)")
                     } else {
+                        self?.sendHandler?(message)
                         print("📤 Message sent!")
                     }
                 })
@@ -46,11 +60,14 @@ class Client {
                 // 서버의 응답 받기
                 self?.connection?.receiveMessage { (data, context, isComplete, error) in
                     if let data = data, let response = String(data: data, encoding: .utf8) {
+                        self?.receiveHandler?(response)
                         print("📩 Server response: \(response)")
                     }
                 }
             case .failed(let error):
-                print("❌ Connection failed: \(error)")
+                print("❌ Connection failed: \(error.localizedDescription)")
+            case .waiting(let error):
+                print("Connection Wating... : \(error.localizedDescription)")
             default:
                 break
             }
