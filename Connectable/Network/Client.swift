@@ -14,7 +14,7 @@ class Client {
     let port: NWEndpoint.Port
     var connection: NWConnection?
     
-    private init(serverIP: String, port: NWEndpoint.Port) {
+    init(serverIP: String, port: NWEndpoint.Port) {
         self.serverIP = serverIP
         self.port = port
         
