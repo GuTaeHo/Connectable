@@ -11,7 +11,7 @@ struct ClientView: View {
     @State var isLoading: Bool = false
     @State var textEditor: String = ""
     
-    let client = Client(serverIP: "192.168.0.168",
+    let client = Client(serverIP: "192.168.9.9",
                         port: .http)
     
     var body: some View {

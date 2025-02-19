@@ -25,14 +25,14 @@ struct ServerView: View {
                 .font(.custom(.semiBold600, size: 18))
             
             HStack {
-                Button(isConnect ? "연결 해제" : "연결 시작") {
+                Button(isConnect ? "중지" : "대기 시작") {
                     do {
                         try server.startConnect()
                     } catch (let error) {
                         print(error.localizedDescription)
                     }
                 }
-                .onChange(of: isConnect) {
+                .onChange(of: isConnect) { _, _ in
                     if isConnect {
                         print()
                     } else {
